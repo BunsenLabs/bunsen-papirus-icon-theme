@@ -1,3 +1,9 @@
+bunsen-papirus-icon-theme (10.1-1) lithium; urgency=medium
+
+  * Add BunsenLabs Lithium logo icons.
+
+ -- John Crawley <john@bunsenlabs.org>  Thu, 27 Jun 2019 17:21:16 +0900
+
 bunsen-papirus-icon-theme (10.0.1-1) lithium; urgency=medium
 
   * Correct theme names in index.theme files.
