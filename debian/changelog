@@ -1,0 +1,11 @@
+bunsen-papirus-icon-theme (10.0.1-1) lithium; urgency=medium
+
+  * Correct theme names in index.theme files.
+
+ -- John Crawley <john@bunsenlabs.org>  Mon, 03 Jun 2019 18:21:18 +0900
+
+bunsen-papirus-icon-theme (10.0-1) lithium; urgency=medium
+
+  * Initial release.
+
+ -- John Crawley <john@bunsenlabs.org>  Mon, 03 Jun 2019 18:07:45 +0900
