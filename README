@@ -10,7 +10,7 @@ The icon themes were generated from Papirus using the script
 papirus-folder-color.sh available here:
 https://gist.github.com/johnraff/0fd5b6e7890377a12bae9f5accdaf295
 
-They inherit Papirus, and depend on papirus-icon-theme.
+They inherit Papirus or Papirus-Dark, and depend on papirus-icon-theme.
 
 Other additional icons:
 BunsenLabs logo
