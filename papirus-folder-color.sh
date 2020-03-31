@@ -16,8 +16,12 @@ copy_files=true # If true, copy icons into new theme instead of symlinking.
 USAGE="
 papirus-folder-color.sh [color]
 Where color can be one of:
-black,blue,bluegrey,brown,cyan,green,grey,magenta,orange,pink,purple,red,teal,violet,yellow
+black,blue,bluegrey,brown,cyan,green,grey,magenta,orange,pink,purple,red,teal,violet,yellow,custom
 If color is not specified, it defaults to bluegrey.
+
+NB \"custom\" color corresponds to jet black, while \"black\"
+is actually dark grey.
+\"jet-black\" may also be passed as an alias for \"custom\"
 
     Generates a user custom icon theme with a different folder color from
     the default Papirus blue.
@@ -51,8 +55,10 @@ error_exit() {
 [[ $(basename "$target_dir") = Papirus* ]] || error_exit "$target_dir: Not a Papirus theme directory" # try to avoid accidents
 
 case "$1" in
-black|blue|bluegrey|brown|cyan|green|grey|magenta|orange|pink|purple|red|teal|violet|yellow)
+black|blue|bluegrey|brown|cyan|green|grey|magenta|orange|pink|purple|red|teal|violet|yellow|custom)
     color="$1";;
+jet-black)
+    color=custom;;
 '')
     color=bluegrey;;
 -h|--help)
