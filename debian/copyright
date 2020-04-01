@@ -6,12 +6,12 @@ Files: *
 Copyright: 2016-2017 Alexey Varfolomeev <varlesh@gmail.com>
            2016-2017 Sergei Eremenko <finalitik@gmail.com>
            2016-2017 Papirus Development Team
-           2019 John Crawley <john@bunsenlabs.org>
-           2019 hhh <hsumen@bunsenlabs.org>
+           2019-2020 John Crawley <john@bunsenlabs.org>
+           2019-2020 hhh <hsumen@bunsenlabs.org>
 License: GPL-3.0+
 
 Files: debian/*
-Copyright: 2019 John Crawley <john@bunsenlabs.org>
+Copyright: 2020 John Crawley <john@bunsenlabs.org>
 License: GPL-3.0+
 
 License: GPL-3.0+

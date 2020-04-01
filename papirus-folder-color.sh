@@ -3,6 +3,9 @@
 # Generate icon theme inheriting Papirus,
 # but with different coloured folder icons.
 
+#### EDIT THESE FOUR VARIABLES APPROPRIATELY ####
+# ( see also the [Icon Theme] spec. from line ~188 )
+
 new_theme='Papirus-bluegrey' # Name of new generated theme
 
 source_dir=/usr/share/icons/Papirus
@@ -12,6 +15,8 @@ target_dir="$HOME/.local/share/icons/${new_theme}"
 #target_dir=../"${new_theme}"
 
 copy_files=true # If true, copy icons into new theme instead of symlinking.
+
+########
 
 USAGE="
 papirus-folder-color.sh [color]
