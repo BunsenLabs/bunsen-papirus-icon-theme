@@ -8,6 +8,8 @@ by copies of the grey and bluegrey variants also provided in that theme.
 
 The icon themes were generated from Papirus using the script
 papirus-folder-color.sh available here:
+/usr/share/bunsen/papirus/papirus-folder-color.sh
+or here:
 https://gist.github.com/johnraff/0fd5b6e7890377a12bae9f5accdaf295
 
 They inherit Papirus or Papirus-Dark, and depend on papirus-icon-theme.
