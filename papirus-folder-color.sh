@@ -4,7 +4,8 @@
 # but with different coloured folder icons.
 
 #### EDIT THESE FOUR VARIABLES APPROPRIATELY ####
-# ( see also the [Icon Theme] spec. from line ~188 )
+# See also the [Icon Theme] spec. from line ~188
+# and possibly change Inherits=Papirus to Papirus-Dark.
 
 new_theme='Papirus-bluegrey' # Name of new generated theme
 
@@ -21,7 +22,7 @@ copy_files=true # If true, copy icons into new theme instead of symlinking.
 USAGE="
 papirus-folder-color.sh [color]
 Where color can be one of:
-black,blue,bluegrey,brown,cyan,green,grey,magenta,orange,pink,purple,red,teal,violet,yellow,custom
+black,blue,bluegrey,breeze,brown,cyan,deeporange,green,grey,indigo,magenta,nordic,orange,palebrown,paleorange,pink,red,teal,violet,white,yaru,yellow,custom
 If color is not specified, it defaults to bluegrey.
 
 NB \"custom\" color corresponds to jet black, while \"black\"
@@ -60,7 +61,7 @@ error_exit() {
 [[ $(basename "$target_dir") = Papirus* ]] || error_exit "$target_dir: Not a Papirus theme directory" # try to avoid accidents
 
 case "$1" in
-black|blue|bluegrey|brown|cyan|green|grey|magenta|orange|pink|purple|red|teal|violet|yellow|custom)
+black|blue|bluegrey|breeze|brown|cyan|deeporange|green|grey|indigo|magenta|nordic|orange|palebrown|paleorange|pink|red|teal|violet|white|yaru|yellow|custom)
     color="$1";;
 jet-black)
     color=custom;;
@@ -80,13 +81,13 @@ set_linking() {
     then
         link_file() { cp "$1" "$2"; }
     else
-        local tld_src=$( readlink -f ${source_dir} )
+        local tld_src=$( readlink -f "${source_dir}" )
         tld_src=${tld_src#/}
         tld_src=${tld_src%%/*}
-        local tld_tgt=$( readlink -f ${target_dir} )
+        local tld_tgt=$( readlink -f "${target_dir}" )
         tld_tgt=${tld_tgt#/}
         tld_tgt=${tld_tgt%%/*}
-        if [[ $tld_src = $tld_tgt ]]
+        if [[ "$tld_src" = "$tld_tgt" ]]
         then
             link_file() { ln -sfr "$1" "$2"; }
         else
@@ -133,26 +134,6 @@ do
         link_file "$subdir/places/$target" "$target_dir/$dirname/places/${i##*/}" || error_exit "Failed to link_file() $target_dir/$dirname/places/${i##*/} to $subdir/places/$target"
     done
     case "${dirname}" in
-    64x64)
-        shortdirlist+="${dirname}/places,${scaledname}/places,"
-        longdirlist+="[${dirname}/places]
-Context=Places
-Size=64
-MinSize=64
-MaxSize=512
-Type=Scalable
-
-[${scaledname}/places]
-Context=Places
-Size=64
-Scale=2
-MinSize=64
-MaxSize=512
-Type=Scalable
-
-"
-
-        ;;
     symbolic)
         shortdirlist+="${dirname}/places,"
         longdirlist+="[${dirname}/places]
@@ -163,7 +144,6 @@ MaxSize=512
 Type=Scalable
 
 "
-
         ;;
     *)
         shortdirlist+="${dirname}/places,${scaledname}/places,"
@@ -179,7 +159,6 @@ Scale=2
 Type=Fixed
 
 "
-
         ;;
     esac
 done
@@ -190,14 +169,22 @@ Name=$new_theme
 Comment=Recoloured Papirus icon theme for BunsenLabs
 Inherits=Papirus,breeze,ubuntu-mono-dark,gnome,hicolor
 
-DesktopDefault=48
-ToolbarDefault=16
-ToolbarSizes=16,22,32,48
-MainToolbarDefault=16
-MainToolbarSizes=16,22,32,48
-PanelDefault=22
-PanelSizes=16,22,32,48,64,128,256
+Example=folder
+
 FollowsColorScheme=true
+
+DesktopDefault=48
+DesktopSizes=16,22,24,32,48,64
+ToolbarDefault=22
+ToolbarSizes=16,22,24,32,48
+MainToolbarDefault=22
+MainToolbarSizes=16,22,24,32,48
+SmallDefault=16
+SmallSizes=16,22,24,32,48
+PanelDefault=48
+PanelSizes=16,22,24,32,48,64
+DialogDefault=48
+DialogSizes=16,22,24,32,48,64
 
 # Directory list
 Directories=${shortdirlist%,}
