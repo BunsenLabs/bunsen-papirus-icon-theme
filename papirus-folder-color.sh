@@ -1,77 +1,133 @@
 #!/bin/bash
 # papirus-folder-color.sh
-# Generate icon theme inheriting Papirus,
+# Generate icon theme inheriting Papirus or Papirus-Dark,
 # but with different coloured folder icons.
 
-#### EDIT THESE FOUR VARIABLES APPROPRIATELY ####
-# See also the [Icon Theme] spec. from line ~188
-# and possibly change Inherits=Papirus to Papirus-Dark.
-
-new_theme='Papirus-bluegrey' # Name of new generated theme
-
-source_dir=/usr/share/icons/Papirus
-#source_dir="$PWD"
-
-target_dir="$HOME/.local/share/icons/${new_theme}"
-#target_dir=../"${new_theme}"
-
-copy_files=true # If true, copy icons into new theme instead of symlinking.
-
-########
-
 USAGE="
-papirus-folder-color.sh [color]
-Where color can be one of:
-black,blue,bluegrey,breeze,brown,cyan,deeporange,green,grey,indigo,magenta,nordic,orange,palebrown,paleorange,pink,red,teal,violet,white,yaru,yellow,custom
-If color is not specified, it defaults to bluegrey.
-
-NB \"custom\" color corresponds to jet black, while \"black\"
-is actually dark grey.
-\"jet-black\" may also be passed as an alias for \"custom\"
+papirus-folder-color.sh [OPTIONS]
 
     Generates a user custom icon theme with a different folder color from
     the default Papirus blue.
 
-papirus-folder-color.sh [-h|--help]
+Options:
+        -h, --help
+            Show this message.
+        -c, --color <color>
+            Choose icon color.
+        -s, --source_path <path>
+            Set path to directory holding Papirus theme to be used.
+        -t, --target_path <path>
+            Set path to directory where new theme will be generated.
+        -n, --name <name>
+            Set name of generated theme.
+        -l, --link
+            Symlink icons to source instead of copying.
+        -d, --dark
+            Declare theme to be dark and inherit Papirus-Dark.
 
-    Display this message.
+color must be specified and can be one of:
+black,blue,bluegrey,breeze,brown,cyan,deeporange,green,grey,indigo,magenta,nordic,orange,palebrown,paleorange,pink,red,teal,violet,white,yaru,yellow,custom
 
-The Papirus theme is read from /usr/share/icons/Papirus, and
-the generated theme written to $HOME/.local/share/icons/${new_theme}
-These paths can be changed by editing the variables
-source_dir, target_dir and new_theme at the top of this file.
+NB \"custom\" color corresponds to jet black, while \"black\" is actually dark grey.
+\"jet-black\" may also be passed as an alias for \"custom\".
 
-If copy_files=true then icons will be copied into the new theme,
-not symlinked (which is the default). This increases the size,
-but improves portability.
+If --source_path is not passed, the Papirus theme is read from
+/usr/share/icons/Papirus
 
-If source_dir and target_dir are under the same top-level directory
+If --target_path is not passed, the generated theme is written to
+~/.local/share/icons/<new theme name>
+
+If --name is not passed, the generated theme will be named
+Papirus-Bunsen[-Dark]-<colour>.
+
+By default icons will be copied into the new theme, not symlinked.
+This increases the size, but improves portability.
+Pass --link to generate symlinks instead.
+
+If source_path and target_path are under the same top-level directory
 then symlinked icons will use relative paths, otherwise absolute paths.
 "
-########################################################################
 
-defcolor=blue # the Papirus default
+vendor=Bunsen # This will be included in generated theme name,
+              # if not overruled by --name option.
+
+## default variables
+## these can (should, at least for color) be overridden by script options
+source_path=/usr/share/icons # place to find source Papirus theme
+target_path="$HOME/.local/share/icons" # place to put generated theme
+#target_path="$PWD"
+copy_files=true # If true, copy icons into new theme instead of symlinking.
+new_theme=''
+color=''
 
 error_exit() {
     echo "$0 error: $1" >&2
     exit 1
 }
 
+while [[ -n $1 ]]
+do
+    case "$1" in
+    --color|-c)
+        color=$2
+        shift 2
+        ;;
+    --source_path|-s)
+        source_path=$2
+        shift 2
+        ;;
+    --target_path|-t)
+        target_path=$2
+        shift 2
+        ;;
+    --name|-n)
+        new_theme=$2
+        shift 2
+        ;;
+    --link|-l)
+        copy_files=false
+        shift
+        ;;
+    --dark|-d)
+        dark_theme=true
+        shift
+        ;;
+    --help|-h)
+        echo "$USAGE"
+        exit
+        ;;
+    *)
+        error_exit "$1: Unrecognized option."
+        ;;
+    esac
+done
+
+########################################################################
+
+case "$color" in
+black|blue|bluegrey|breeze|brown|cyan|deeporange|green|grey|indigo|magenta|nordic|orange|palebrown|paleorange|pink|red|teal|violet|white|yaru|yellow|custom)
+    ;;
+jet-black)
+    color=custom;;
+*)
+    error_exit "${color}: Unrecognized colour."
+esac
+
+[[ -n $new_theme ]] || {
+    if [[ $dark_theme = true ]]
+    then
+        new_theme="Papirus-Bunsen-Dark-${color}"
+    else
+        new_theme="Papirus-Bunsen-${color}"
+    fi
+}
+
+source_dir="$source_path/Papirus"
+target_dir="$target_path/$new_theme"
+
 [[ $(basename "$source_dir") = Papirus ]] || error_exit "$source_dir: Not a Papirus theme directory"
 [[ $(basename "$target_dir") = Papirus* ]] || error_exit "$target_dir: Not a Papirus theme directory" # try to avoid accidents
 
-case "$1" in
-black|blue|bluegrey|breeze|brown|cyan|deeporange|green|grey|indigo|magenta|nordic|orange|palebrown|paleorange|pink|red|teal|violet|white|yaru|yellow|custom)
-    color="$1";;
-jet-black)
-    color=custom;;
-'')
-    color=bluegrey;;
--h|--help)
-    echo "$USAGE"; exit;;
-*)
-    error_exit "$1: Unrecognized option."
-esac
 
 # Define function to make symlinks,
 # relative if source & target have same top-level directory.
@@ -110,11 +166,12 @@ set_linking
 }
 mkdir -p "$target_dir" || error_exit "Failed to create $target_dir"
 
+defcolor=blue # the Papirus default
 shortdirlist=
 longdirlist=
 for subdir in "$source_dir"/*
 do
-    [[ -d ${subdir}/places && ! -h $subdir ]] || continue
+    [[ -d ${subdir}/places && ! -h $subdir ]] || continue # only use icons in "places" directories
     files=()
     while IFS= read -r -d '' file
     do
@@ -163,11 +220,18 @@ Type=Fixed
     esac
 done
 
+if [[ $dark_theme = true ]]
+then
+    inherit="Papirus-Dark"
+else
+    inherit="Papirus"
+fi
+
 cat <<EOF > "$target_dir/index.theme"
 [Icon Theme]
 Name=$new_theme
 Comment=Recoloured Papirus icon theme for BunsenLabs
-Inherits=Papirus,breeze,ubuntu-mono-dark,gnome,hicolor
+Inherits=${inherit},breeze,ubuntu-mono-dark,gnome,hicolor
 
 Example=folder
 
