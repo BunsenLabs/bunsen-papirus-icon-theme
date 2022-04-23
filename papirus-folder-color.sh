@@ -18,6 +18,10 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# If not overruled by --name option, this will be included in generated theme name.
+# Other vendors, please edit to taste:
+vendor=Bunsen
+
 USAGE="
 papirus-folder-color.sh [OPTIONS]
 
@@ -53,7 +57,7 @@ If --target_path is not passed, the generated theme is written to
 ~/.local/share/icons/<new theme name>
 
 If --name is not passed, the generated theme will be named
-Papirus-Bunsen[-Dark]-<colour>.
+Papirus-${vendor}[-Dark]-<color>.
 
 By default icons will be copied into the new theme, not symlinked.
 This increases the size, but improves portability.
@@ -62,9 +66,6 @@ Pass --link to generate symlinks instead.
 If source_path and target_path are under the same top-level directory
 then symlinked icons will use relative paths, otherwise absolute paths.
 "
-
-vendor=Bunsen # This will be included in generated theme name,
-              # if not overruled by --name option.
 
 ## default variables
 ## these can (should, at least for color) be overridden by script options
@@ -131,9 +132,9 @@ esac
 [[ -n $new_theme ]] || {
     if [[ $dark_theme = true ]]
     then
-        new_theme="Papirus-Bunsen-Dark-${color}"
+        new_theme="Papirus-${vendor}-Dark-${color}"
     else
-        new_theme="Papirus-Bunsen-${color}"
+        new_theme="Papirus-${vendor}-${color}"
     fi
 }
 
