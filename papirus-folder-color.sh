@@ -238,16 +238,16 @@ done
 
 if [[ $dark_theme = true ]]
 then
-    inherit="Papirus-Dark"
+    inherit="Papirus-Dark,breeze-dark"
 else
-    inherit="Papirus"
+    inherit="Papirus,breeze"
 fi
 
 cat <<EOF > "$target_dir/index.theme"
 [Icon Theme]
 Name=$new_theme
 Comment=Recoloured Papirus icon theme for BunsenLabs
-Inherits=${inherit},breeze,ubuntu-mono-dark,gnome,hicolor
+Inherits=${inherit},hicolor
 
 Example=folder
 
