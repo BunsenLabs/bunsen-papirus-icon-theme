@@ -9,7 +9,7 @@
 
 set -e
 
-BL_START_HERE='/usr/share/icons/Papirus-Bunsen-Dark-bluegrey/48x48/apps/start-here.svg'
+BL_START_HERE='/usr/share/icons/Papirus-Bunsen-Dark-black/48x48/apps/start-here.svg'
 
 START_HERE_ALT_DIR='/usr/share/icons/gnome/scalable/places'
 START_HERE_ALT_LINK="$START_HERE_ALT_DIR/start-here.svg"

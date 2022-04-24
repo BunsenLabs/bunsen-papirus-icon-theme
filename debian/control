@@ -13,5 +13,5 @@ Architecture: all
 Depends: ${misc:Depends}, papirus-icon-theme
 Description: Some substitute icons for the Papirus icon theme.
  The default blue Papirus folder icons have been replaced by
- grey or bluegrey icons, and some others added.
+ black, grey or bluegrey icons, and some others added.
  This theme inherits Papirus and depends on papirus-icon-theme.

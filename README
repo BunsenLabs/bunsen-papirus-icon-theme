@@ -1,10 +1,10 @@
 BunsenLabs Papirus Icon Theme
 =============================
 
-Some substituted icons for the Papirus icon theme.
+Some substituted and additional icons for the Papirus icon theme.
 
 The default blue folder icons in Papirus have been overridden
-by copies of the grey and bluegrey variants also provided in that theme.
+by copies of the black, grey and bluegrey variants also provided in that theme.
 
 The icon themes were generated from Papirus using the script
 papirus-folder-color.sh available here:
