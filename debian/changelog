@@ -1,3 +1,14 @@
+bunsen-papirus-icon-theme (11.1-1) beryllium; urgency=medium
+
+  * Add Beryllium default Papirus-Bunsen-Dark-black icon theme.
+  * papirus-folder-color.sh:
+    - use CLI options, not editable variables.
+    - add other tweaks and bugfixes.
+  * Other index.theme files: sync with current Papirus.
+  * Update README and debian files.
+
+ -- John Crawley <john@bunsenlabs.org>  Sun, 24 Apr 2022 13:00:38 +0900
+
 bunsen-papirus-icon-theme (11.0-1) beryllium; urgency=medium
 
   * Migrate for Debian Bullseye.
