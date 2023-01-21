@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/BunsenLabs/bunsen-papirus-icon-theme
 
 Package: bunsen-papirus-icon-theme
 Architecture: all
-Depends: ${misc:Depends}, papirus-icon-theme
+Depends: ${misc:Depends}, papirus-icon-theme, librsvg2-common
 Description: Some substitute icons for the Papirus icon theme.
  The default blue Papirus folder icons have been replaced by
  black, grey or bluegrey icons, and some others added.
