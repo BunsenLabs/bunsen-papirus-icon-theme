@@ -1,3 +1,10 @@
+bunsen-papirus-icon-theme (12.1-1) boron; urgency=medium
+
+  * papirus-folder-color.sh: update papirus folder colours
+  * debian/copyright: correct Upstream-Name and Source
+
+ -- John Crawley <john@bunsenlabs.org>  Thu, 13 Apr 2023 13:12:40 +0900
+
 bunsen-papirus-icon-theme (12.0-1) boron; urgency=medium
 
   * Migrate for Debian Bookworm
