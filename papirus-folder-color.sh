@@ -45,7 +45,7 @@ Options:
             Declare theme to be dark and inherit Papirus-Dark.
 
 color must be specified and can be one of:
-black,blue,bluegrey,breeze,brown,cyan,deeporange,green,grey,indigo,magenta,nordic,orange,palebrown,paleorange,pink,red,teal,violet,white,yaru,yellow,custom
+adwaita,black,blue,bluegrey,breeze,brown,carmine,cyan,darkcyan,deeporange,green,grey,indigo,magenta,nordic,orange,palebrown,paleorange,pink,red,teal,violet,white,yaru,yellow,custom
 
 NB \"custom\" color corresponds to jet black, while \"black\" is actually dark grey.
 \"jet-black\" may also be passed as an alias for \"custom\".
@@ -121,7 +121,7 @@ done
 ########################################################################
 
 case "$color" in
-black|blue|bluegrey|breeze|brown|cyan|deeporange|green|grey|indigo|magenta|nordic|orange|palebrown|paleorange|pink|red|teal|violet|white|yaru|yellow|custom)
+adwaita|black|blue|bluegrey|breeze|brown|carmine|cyan|darkcyan|deeporange|green|grey|indigo|magenta|nordic|orange|palebrown|paleorange|pink|red|teal|violet|white|yaru|yellow|custom)
     ;;
 jet-black)
     color=custom;;
